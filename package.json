@@ -1,0 +1,14 @@
+{
+  "name": "supergulp",
+  "version": "1.0.0",
+  "description": "learn Gulp by building an awesome development environment",
+  "author": "pidokige02 <pidokige0204@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "gulp dev",
+    "build": "gulp build"
+  },
+  "dependencies": {
+    "gulp": "^4.0.2"
+  }
+}
