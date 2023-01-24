@@ -19,15 +19,19 @@ const pug = () =>
 
 const clean = () => del(["build/"]);
 
-export const dev = gulp.series([clean, pug]);
+// export const dev = gulp.series([clean, pug]);
+// 위의 것은 test 를 위해 temp 로 만든 것임
 
-// const webserver = () =>
-//     gulp.src("build").pipe(ws({ livereload: true, open: true }));
+const webserver = () =>
+    gulp.src("build").pipe(ws({ livereload: true, open: true }));
+// build directory 아래의 것을 webserver 를 이용하여 loading 한다는 의미임.
 
-// const prepare = gulp.series([clean]);
+const prepare = gulp.series([clean]);
 
-// const assets = gulp.series([pug]);
+const assets = gulp.series([pug]);
 
-// const postDev = gulp.series([webserver]);
+const postDev = gulp.series([webserver]);
 
-// export const dev = gulp.series([prepare, assets, postDev]);
+// export const dev = gulp.series([prepare, assets]);
+
+export const dev = gulp.series([prepare, assets, postDev]);
