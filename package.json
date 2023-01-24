@@ -18,11 +18,14 @@
     "sass": "^1.57.1"
   },
   "dependencies": {
+    "babelify": "^10.0.0",
     "del": "^4.1.1",
     "gulp-autoprefixer": "^8.0.0",
+    "gulp-bro": "^2.0.0",
     "gulp-csso": "^4.0.1",
     "gulp-image": "^4.4.1",
     "gulp-webserver": "^0.9.1",
-    "node-sass": "^6.0.0"
+    "node-sass": "^6.0.0",
+    "uglifyify": "^5.0.2"
   }
 }

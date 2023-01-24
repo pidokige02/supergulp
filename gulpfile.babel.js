@@ -8,6 +8,8 @@ import image from "gulp-image";
 
 import autoprefixer from "gulp-autoprefixer";
 import miniCSS from "gulp-csso";
+import bro from "gulp-bro";
+import babelify from "babelify";
 
 // sass.compiler = require("node-sass");
 
@@ -27,6 +29,11 @@ const routes = {
     watch: "src/scss/**/*.scss",
     src: "src/scss/styles.scss",
     dest: "build/css"
+  },
+  js: {
+    watch: "src/js/**/*.js",
+    src: "src/js/main.js",
+    dest: "build/js"
   }
 };
 
@@ -62,16 +69,30 @@ const styles = () =>
       .pipe(miniCSS())
       .pipe(gulp.dest(routes.scss.dest));
 
+const js = () =>
+      gulp
+        .src(routes.js.src)
+        .pipe(
+          bro({
+            transform: [
+              babelify.configure({ presets: ["@babel/preset-env"] }),
+              ["uglifyify", { global: true }]
+            ]
+          })
+        )
+        .pipe(gulp.dest(routes.js.dest));
+
 const watch = () => {
   gulp.watch(routes.pug.watch, pug);
   gulp.watch(routes.img.src, img);
   gulp.watch(routes.scss.watch, styles);
+  gulp.watch(routes.js.watch, js);
 };
 
 const prepare = gulp.series([clean, img]);
 // big image 같은 경우는 시간이 많이 걸리기 때문에 dev 준비 과정에서 처리한다.
 
-const assets = gulp.series([pug, styles]);
+const assets = gulp.series([pug, styles, js]);
 
 const live = gulp.parallel([webserver, watch]);
 
