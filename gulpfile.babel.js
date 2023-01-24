@@ -19,13 +19,15 @@ const pug = () =>
 
 const clean = () => del(["build/"]);
 
-const webserver = () =>
-    gulp.src("build").pipe(ws({ livereload: true, open: true }));
+export const dev = gulp.series([clean, pug]);
 
-const prepare = gulp.series([clean]);
+// const webserver = () =>
+//     gulp.src("build").pipe(ws({ livereload: true, open: true }));
 
-const assets = gulp.series([pug]);
+// const prepare = gulp.series([clean]);
 
-const postDev = gulp.series([webserver]);
+// const assets = gulp.series([pug]);
 
-export const dev = gulp.series([prepare, assets, postDev]);
+// const postDev = gulp.series([webserver]);
+
+// export const dev = gulp.series([prepare, assets, postDev]);
